@@ -115,7 +115,17 @@ module.exports = function (args) {
                     }
                     return false;
                 }
-                objDoc.paths = { ...objDoc.paths, ...obj };
+                
+                // If path already exists, simply append to the existing definition rather than overwrite it
+                const route = Object.keys(obj)[0];
+                if (route in objDoc.paths) {
+                    objDoc.paths[route] = {
+                        ...objDoc.paths[route],
+                        ...obj[route],
+                    }
+                } else {
+                    objDoc.paths = { ...objDoc.paths, ...obj };
+                }
             }
             let constainXML = false;
             if (JSON.stringify(objDoc).includes('application/xml')) {
