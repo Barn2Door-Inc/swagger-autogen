@@ -23,7 +23,7 @@ const overwriteMerge = (destinationArray, sourceArray, options) => {
  * @param {string} relativePath Relative file's path.
  * @param {array} receivedRouteMiddlewares Array containing middleware to be applied in the endpoint's file.
  */
-function readEndpointFile(filePath, pathRoute = '', relativePath, receivedRouteMiddlewares = [], restrictedContent, globalSwaggerProperties) {
+function readEndpointFile(filePath, pathRoute = '', relativePath, receivedRouteMiddlewares = [], restrictedContent, globalSwaggerProperties, basePath = '') {
     return new Promise(resolve => {
         let paths = {};
         fs.readFile(filePath, 'utf8', async function (err, data) {
@@ -1052,7 +1052,7 @@ function readEndpointFile(filePath, pathRoute = '', relativePath, receivedRouteM
                             path = path.replaceAll('//', '/');
                         }
 
-                        objEndpoint[path] = {};
+                        objEndpoint[`${basePath}${path}`] = {};
                     }
 
                     // Getting Method
