@@ -108,7 +108,7 @@ module.exports = function (args) {
                     relativePath = null;
                 }
 
-                let obj = await handleFiles.readEndpointFile(filePath, '', relativePath, [], null, null, objDoc.basePath);
+                let obj = await handleFiles.readEndpointFile(filePath, '', relativePath, []);
                 if (obj === false) {
                     if (!options.disableLogs) {
                         console.log('Swagger-autogen:', '\x1b[31m', 'Failed ' + symbols.failed, '\x1b[0m');
